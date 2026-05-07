@@ -1,0 +1,360 @@
+{
+  "trip_summary": {
+    "destination": "Coorg, Karnataka",
+    "origin": "Bengaluru",
+    "num_days": 3,
+    "num_travellers": 4
+  },
+  "travel_route": {
+    "origin": "Bengaluru",
+    "destination": "Coorg, Karnataka",
+    "total_distance_km": 270,
+    "estimated_drive_hours": 5.0,
+    "departure_time": "06:30 AM",
+    "arrival_time": "12:00 PM (Day 1)",
+    "highway": "NH-275 (Bengaluru–Mysuru Expressway + Kushalnagar)",
+    "fuel_stops": [
+      "Km 60  – HP Petrol Pump, Channapatna",
+      "Km 190 – Indian Oil, Kushalnagar"
+    ],
+    "rest_stops": [
+      {
+        "name": "Kamat Upachar Highway Restaurant",
+        "km_mark": 85,
+        "suggested_break": "08:15 AM – 08:45 AM",
+        "type": "Breakfast stop"
+      },
+      {
+        "name": "Coffee Day Lounge, Kushalnagar",
+        "km_mark": 195,
+        "suggested_break": "10:30 AM – 11:00 AM",
+        "type": "Coffee / stretch break"
+      }
+    ]
+  },
+  "days": {
+    "Day 1": {
+      "meals": [
+        {
+          "day": 1,
+          "meal": "Breakfast",
+          "time": "08:00 AM",
+          "name": "Raintree Restaurant",
+          "cuisine": "Multi-cuisine",
+          "rating": 4.3,
+          "price_range": "Rs.300-600",
+          "speciality": "Seafood grill & family buffet",
+          "address": "Club Road, Madikeri"
+        },
+        {
+          "day": 1,
+          "meal": "Lunch",
+          "time": "01:00 PM",
+          "name": "Misty Valley Café",
+          "cuisine": "Breakfast / Cafe",
+          "rating": 4.5,
+          "price_range": "Rs.150-350",
+          "speciality": "Coorg filter coffee & akki roti",
+          "address": "Market Cross, Madikeri"
+        },
+        {
+          "day": 1,
+          "meal": "Dinner",
+          "time": "07:30 PM",
+          "name": "Jungle Retreat Dining",
+          "cuisine": "Organic Farm-to-table",
+          "rating": 4.6,
+          "price_range": "Rs.600-1000",
+          "speciality": "Wild mushroom risotto & organic salads",
+          "address": "Siddapur Road"
+        }
+      ],
+      "activities": [
+        {
+          "day": 1,
+          "slot": 1,
+          "name": "Abbey Falls",
+          "type": "Nature / Waterfall",
+          "duration_hrs": 2,
+          "entry_fee": "Free",
+          "best_time": "Morning",
+          "description": "Stunning 70-ft cascade surrounded by coffee & spice plantations. 10-min forest walk"
+        },
+        {
+          "day": 1,
+          "slot": 2,
+          "name": "Raja's Seat Viewpoint",
+          "type": "Scenic / Sunrise",
+          "duration_hrs": 1.5,
+          "entry_fee": "Rs.15/person",
+          "best_time": "Early Morning / Evening",
+          "description": "Historic garden with panoramic view of valleys & coffee estates. Toy train for kids"
+        },
+        {
+          "day": 1,
+          "slot": 3,
+          "name": "Iruppu Falls Trek",
+          "type": "Adventure / Trek",
+          "duration_hrs": 4,
+          "entry_fee": "Rs.50/person",
+          "best_time": "Morning",
+          "description": "Scenic 2 km trail to a sacred 60-ft waterfall. Moderate difficulty – great for families"
+        }
+      ],
+      "accommodation": {
+        "name": "Coorg Heritage Haveli",
+        "type": "Heritage Homestay",
+        "rating": 4.8,
+        "price_per_night": 3800,
+        "rooms_available": 3,
+        "amenities": [
+          "AC",
+          "Home-cooked Kodava meals",
+          "Coffee plantation tour",
+          "Parking",
+          "Wi-Fi",
+          "Kids play area"
+        ],
+        "hosts": "Nanda Family (Kodava)",
+        "highlights": "150-year-old estate bungalow; hosts take guests on a guided coffee-picking walk",
+        "distance_from_center": "2 km from Madikeri",
+        "contact": "+91-94481-12345"
+      }
+    },
+    "Day 2": {
+      "meals": [
+        {
+          "day": 2,
+          "meal": "Breakfast",
+          "time": "08:00 AM",
+          "name": "Hotel Capitol Village Dhaba",
+          "cuisine": "North Indian Thali",
+          "rating": 4.2,
+          "price_range": "Rs.200-400",
+          "speciality": "Unlimited rajma-chawal & masala chai",
+          "address": "Bus Stand, Madikeri"
+        },
+        {
+          "day": 2,
+          "meal": "Lunch",
+          "time": "01:00 PM",
+          "name": "Plantation Nest Restaurant",
+          "cuisine": "Coorg & Kerala Fusion",
+          "rating": 4.5,
+          "price_range": "Rs.450-750",
+          "speciality": "Prawn ghee roast & coconut fish curry",
+          "address": "Virajpet Bypass"
+        },
+        {
+          "day": 2,
+          "meal": "Dinner",
+          "time": "07:30 PM",
+          "name": "Sunrise South Indian Eatery",
+          "cuisine": "South Indian",
+          "rating": 4.6,
+          "price_range": "Rs.100-250",
+          "speciality": "Ghee podi idli & drumstick sambar",
+          "address": "Temple Street, Bhagamandala"
+        }
+      ],
+      "activities": [
+        {
+          "day": 2,
+          "slot": 1,
+          "name": "Dubare Elephant Camp",
+          "type": "Wildlife / Family",
+          "duration_hrs": 3,
+          "entry_fee": "Rs.500/person",
+          "best_time": "Morning (9–11 AM)",
+          "description": "Bathe with elephants in Cauvery River. Kids' highlight of any Coorg trip"
+        },
+        {
+          "day": 2,
+          "slot": 2,
+          "name": "Coorg Coffee Plantation Tour",
+          "type": "Culture / Experience",
+          "duration_hrs": 2,
+          "entry_fee": "Rs.300/person",
+          "best_time": "Morning",
+          "description": "Walk through a working estate, learn coffee processing, taste estate-fresh brew"
+        },
+        {
+          "day": 2,
+          "slot": 3,
+          "name": "Nagarhole National Park Safari",
+          "type": "Wildlife Safari",
+          "duration_hrs": 3,
+          "entry_fee": "Rs.700/vehicle",
+          "best_time": "Early Morning (6–9 AM)",
+          "description": "Spot tigers, leopards, elephants & 300+ birds in one of India's premier reserves"
+        }
+      ],
+      "accommodation": {
+        "name": "Coorg Heritage Haveli",
+        "type": "Heritage Homestay",
+        "rating": 4.8,
+        "price_per_night": 3800,
+        "rooms_available": 3,
+        "amenities": [
+          "AC",
+          "Home-cooked Kodava meals",
+          "Coffee plantation tour",
+          "Parking",
+          "Wi-Fi",
+          "Kids play area"
+        ],
+        "hosts": "Nanda Family (Kodava)",
+        "highlights": "150-year-old estate bungalow; hosts take guests on a guided coffee-picking walk",
+        "distance_from_center": "2 km from Madikeri",
+        "contact": "+91-94481-12345"
+      }
+    },
+    "Day 3": {
+      "meals": [
+        {
+          "day": 3,
+          "meal": "Breakfast",
+          "time": "08:00 AM",
+          "name": "Spice Garden Family Restaurant",
+          "cuisine": "Coorg Thali",
+          "rating": 4.7,
+          "price_range": "Rs.350-550",
+          "speciality": "Authentic Pandi curry & Kadambuttu (rice dumplings)",
+          "address": "Main Bazaar, Madikeri"
+        },
+        {
+          "day": 3,
+          "meal": "Lunch",
+          "time": "01:00 PM",
+          "name": "The Mango Shade Cafe",
+          "cuisine": "Continental & South Indian",
+          "rating": 4.4,
+          "price_range": "Rs.400-700",
+          "speciality": "Fresh pepper chicken & wood-fire pizzas",
+          "address": "Raja's Seat Road"
+        },
+        {
+          "day": 3,
+          "meal": "Dinner",
+          "time": "07:30 PM",
+          "name": "Coorg Heritage Dining",
+          "cuisine": "Traditional Kodava",
+          "rating": 4.8,
+          "price_range": "Rs.500-900",
+          "speciality": "Bamboo shoot curry & Coorg honey pancakes",
+          "address": "Abbey Falls Road"
+        }
+      ],
+      "activities": [
+        {
+          "day": 3,
+          "slot": 1,
+          "name": "Omkareshwara Temple",
+          "type": "Spiritual / Heritage",
+          "duration_hrs": 1,
+          "entry_fee": "Free",
+          "best_time": "Morning",
+          "description": "Unique blend of Islamic & Gothic architecture. Peaceful backwater pond & fish feeding"
+        },
+        {
+          "day": 3,
+          "slot": 2,
+          "name": "Madikeri Fort & Museum",
+          "type": "History",
+          "duration_hrs": 2,
+          "entry_fee": "Rs.20/person",
+          "best_time": "Morning",
+          "description": "18th-century fort converted to museum with Kodava artifacts & British-era exhibits"
+        },
+        {
+          "day": 3,
+          "slot": 3,
+          "name": "Talakaveri – Source of River Cauvery",
+          "type": "Spiritual / Scenic",
+          "duration_hrs": 2.5,
+          "entry_fee": "Free",
+          "best_time": "Morning",
+          "description": "Holy origin of Cauvery River atop Brahmagiri hills; short ropeway ride available"
+        }
+      ],
+      "accommodation": {
+        "name": "Coorg Heritage Haveli",
+        "type": "Heritage Homestay",
+        "rating": 4.8,
+        "price_per_night": 3800,
+        "rooms_available": 3,
+        "amenities": [
+          "AC",
+          "Home-cooked Kodava meals",
+          "Coffee plantation tour",
+          "Parking",
+          "Wi-Fi",
+          "Kids play area"
+        ],
+        "hosts": "Nanda Family (Kodava)",
+        "highlights": "150-year-old estate bungalow; hosts take guests on a guided coffee-picking walk",
+        "distance_from_center": "2 km from Madikeri",
+        "contact": "+91-94481-12345"
+      }
+    }
+  },
+  "all_homestay_options": [
+    {
+      "name": "Coorg Heritage Haveli",
+      "type": "Heritage Homestay",
+      "rating": 4.8,
+      "price_per_night": 3800,
+      "rooms_available": 3,
+      "amenities": [
+        "AC",
+        "Home-cooked Kodava meals",
+        "Coffee plantation tour",
+        "Parking",
+        "Wi-Fi",
+        "Kids play area"
+      ],
+      "hosts": "Nanda Family (Kodava)",
+      "highlights": "150-year-old estate bungalow; hosts take guests on a guided coffee-picking walk",
+      "distance_from_center": "2 km from Madikeri",
+      "contact": "+91-94481-12345"
+    },
+    {
+      "name": "Green Canopy Plantation Stay",
+      "type": "Eco Farm Homestay",
+      "rating": 4.6,
+      "price_per_night": 2900,
+      "rooms_available": 2,
+      "amenities": [
+        "Organic farm-to-table meals",
+        "Bird-watching trail",
+        "Bonfire",
+        "Parking",
+        "Nature walks",
+        "River dip spot"
+      ],
+      "hosts": "Devaiah Family",
+      "highlights": "Surrounded by 10 acres of coffee & spice. Kids love spice garden walks",
+      "distance_from_center": "7 km from Madikeri",
+      "contact": "+91-98861-67890"
+    },
+    {
+      "name": "Misty Pines Hilltop Cottage",
+      "type": "Hilltop View Cottage",
+      "rating": 4.7,
+      "price_per_night": 4500,
+      "rooms_available": 2,
+      "amenities": [
+        "360-degree valley view",
+        "Private jacuzzi",
+        "AC",
+        "Barbeque",
+        "Stargazing deck",
+        "Parking"
+      ],
+      "hosts": "Kariappa Family",
+      "highlights": "Stunning mist-covered sunrise views; private pool; best for families with teens",
+      "distance_from_center": "5 km from Madikeri",
+      "contact": "+91-90089-44321"
+    }
+  ]
+}
