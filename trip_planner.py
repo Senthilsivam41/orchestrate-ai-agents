@@ -26,16 +26,17 @@
 
 import json
 import time
-from typing import TypedDict, Annotated, List, Dict, Any, Optional
+from typing import TypedDict, Annotated, List, Dict, Any
 from datetime import datetime
 
 import operator
 import matplotlib
-matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
 from langgraph.graph import StateGraph, END
+
+matplotlib.use("Agg")
 
 # ─────────────────────────────────────────────────────────────────────────────
 # 1. STATE  ── key design rule for parallel branches:
@@ -45,6 +46,7 @@ from langgraph.graph import StateGraph, END
 # ─────────────────────────────────────────────────────────────────────────────
 
 class TripState(TypedDict):
+    """The state of the trip planning graph."""
     # ── Immutable inputs (set once by initialize_trip) ────────────────────
     destination:  str
     origin:       str
@@ -100,35 +102,44 @@ def _mock_route(origin: str, destination: str) -> Dict:
     }
 
 
-def _mock_restaurants(destination: str, days: int) -> List[Dict]:
+def _mock_restaurants(_destination: str, days: int) -> List[Dict]:
     options = [
         {"name": "Spice Garden Family Restaurant",  "cuisine": "Coorg Thali",
          "rating": 4.7, "price_range": "Rs.350-550",
-         "speciality": "Authentic Pandi curry & Kadambuttu (rice dumplings)", "address": "Main Bazaar, Madikeri"},
+          "speciality": "Authentic Pandi curry & Kadambuttu (rice dumplings)",
+          "address": "Main Bazaar, Madikeri"},
         {"name": "The Mango Shade Cafe",            "cuisine": "Continental & South Indian",
          "rating": 4.4, "price_range": "Rs.400-700",
-         "speciality": "Fresh pepper chicken & wood-fire pizzas",            "address": "Raja's Seat Road"},
+          "speciality": "Fresh pepper chicken & wood-fire pizzas",
+          "address": "Raja's Seat Road"},
         {"name": "Coorg Heritage Dining",           "cuisine": "Traditional Kodava",
          "rating": 4.8, "price_range": "Rs.500-900",
-         "speciality": "Bamboo shoot curry & Coorg honey pancakes",          "address": "Abbey Falls Road"},
+          "speciality": "Bamboo shoot curry & Coorg honey pancakes",
+          "address": "Abbey Falls Road"},
         {"name": "Raintree Restaurant",             "cuisine": "Multi-cuisine",
          "rating": 4.3, "price_range": "Rs.300-600",
-         "speciality": "Seafood grill & family buffet",                      "address": "Club Road, Madikeri"},
+          "speciality": "Seafood grill & family buffet",
+          "address": "Club Road, Madikeri"},
         {"name": "Misty Valley Café",               "cuisine": "Breakfast / Cafe",
          "rating": 4.5, "price_range": "Rs.150-350",
-         "speciality": "Coorg filter coffee & akki roti",                    "address": "Market Cross, Madikeri"},
+          "speciality": "Coorg filter coffee & akki roti",
+          "address": "Market Cross, Madikeri"},
         {"name": "Jungle Retreat Dining",           "cuisine": "Organic Farm-to-table",
          "rating": 4.6, "price_range": "Rs.600-1000",
-         "speciality": "Wild mushroom risotto & organic salads",             "address": "Siddapur Road"},
+          "speciality": "Wild mushroom risotto & organic salads",
+          "address": "Siddapur Road"},
         {"name": "Hotel Capitol Village Dhaba",     "cuisine": "North Indian Thali",
          "rating": 4.2, "price_range": "Rs.200-400",
-         "speciality": "Unlimited rajma-chawal & masala chai",              "address": "Bus Stand, Madikeri"},
+          "speciality": "Unlimited rajma-chawal & masala chai",
+          "address": "Bus Stand, Madikeri"},
         {"name": "Plantation Nest Restaurant",      "cuisine": "Coorg & Kerala Fusion",
          "rating": 4.5, "price_range": "Rs.450-750",
-         "speciality": "Prawn ghee roast & coconut fish curry",             "address": "Virajpet Bypass"},
+          "speciality": "Prawn ghee roast & coconut fish curry",
+          "address": "Virajpet Bypass"},
         {"name": "Sunrise South Indian Eatery",     "cuisine": "South Indian",
          "rating": 4.6, "price_range": "Rs.100-250",
-         "speciality": "Ghee podi idli & drumstick sambar",                 "address": "Temple Street, Bhagamandala"},
+          "speciality": "Ghee podi idli & drumstick sambar",
+          "address": "Temple Street, Bhagamandala"},
     ]
     meal_labels = ["Breakfast", "Lunch", "Dinner"]
     meal_times  = {"Breakfast": "08:00 AM", "Lunch": "01:00 PM", "Dinner": "07:30 PM"}
@@ -140,7 +151,7 @@ def _mock_restaurants(destination: str, days: int) -> List[Dict]:
     return schedule
 
 
-def _mock_homestays(destination: str) -> List[Dict]:
+def _mock_homestays(_destination: str) -> List[Dict]:
     return [
         {
             "name":                 "Coorg Heritage Haveli",
@@ -151,7 +162,8 @@ def _mock_homestays(destination: str) -> List[Dict]:
             "amenities":            ["AC", "Home-cooked Kodava meals", "Coffee plantation tour",
                                      "Parking", "Wi-Fi", "Kids play area"],
             "hosts":                "Nanda Family (Kodava)",
-            "highlights":           "150-year-old estate bungalow; hosts take guests on a guided coffee-picking walk",
+            "highlights": "150-year-old estate bungalow; "
+                          "hosts take guests on a guided coffee-picking walk",
             "distance_from_center": "2 km from Madikeri",
             "contact":              "+91-94481-12345"
         },
@@ -164,7 +176,8 @@ def _mock_homestays(destination: str) -> List[Dict]:
             "amenities":            ["Organic farm-to-table meals", "Bird-watching trail",
                                      "Bonfire", "Parking", "Nature walks", "River dip spot"],
             "hosts":                "Devaiah Family",
-            "highlights":           "Surrounded by 10 acres of coffee & spice. Kids love spice garden walks",
+            "highlights": "Surrounded by 10 acres of coffee & spice. "
+                          "Kids love spice garden walks",
             "distance_from_center": "7 km from Madikeri",
             "contact":              "+91-98861-67890"
         },
@@ -177,27 +190,31 @@ def _mock_homestays(destination: str) -> List[Dict]:
             "amenities":            ["360-degree valley view", "Private jacuzzi", "AC",
                                      "Barbeque", "Stargazing deck", "Parking"],
             "hosts":                "Kariappa Family",
-            "highlights":           "Stunning mist-covered sunrise views; private pool; best for families with teens",
+            "highlights": "Stunning mist-covered sunrise views; private pool; "
+                          "best for families with teens",
             "distance_from_center": "5 km from Madikeri",
             "contact":              "+91-90089-44321"
         }
     ]
 
 
-def _mock_attractions(destination: str, days: int) -> List[Dict]:
+def _mock_attractions(_destination: str, days: int) -> List[Dict]:
     all_attractions = [
         {"name": "Abbey Falls",                      "type": "Nature / Waterfall",
          "duration_hrs": 2, "entry_fee": "Free",
          "best_time": "Morning",
-         "description": "Stunning 70-ft cascade surrounded by coffee & spice plantations. 10-min forest walk"},
+          "description": "Stunning 70-ft cascade surrounded by coffee & spice plantations. "
+                         "10-min forest walk"},
         {"name": "Raja's Seat Viewpoint",            "type": "Scenic / Sunrise",
          "duration_hrs": 1.5, "entry_fee": "Rs.15/person",
          "best_time": "Early Morning / Evening",
-         "description": "Historic garden with panoramic view of valleys & coffee estates. Toy train for kids"},
+          "description": "Historic garden with panoramic view of valleys & coffee estates. "
+                         "Toy train for kids"},
         {"name": "Iruppu Falls Trek",                "type": "Adventure / Trek",
          "duration_hrs": 4, "entry_fee": "Rs.50/person",
          "best_time": "Morning",
-         "description": "Scenic 2 km trail to a sacred 60-ft waterfall. Moderate difficulty – great for families"},
+          "description": "Scenic 2 km trail to a sacred 60-ft waterfall. "
+                         "Moderate difficulty – great for families"},
         {"name": "Dubare Elephant Camp",             "type": "Wildlife / Family",
          "duration_hrs": 3, "entry_fee": "Rs.500/person",
          "best_time": "Morning (9–11 AM)",
@@ -205,23 +222,28 @@ def _mock_attractions(destination: str, days: int) -> List[Dict]:
         {"name": "Coorg Coffee Plantation Tour",     "type": "Culture / Experience",
          "duration_hrs": 2, "entry_fee": "Rs.300/person",
          "best_time": "Morning",
-         "description": "Walk through a working estate, learn coffee processing, taste estate-fresh brew"},
+          "description": "Walk through a working estate, learn coffee processing, "
+                         "taste estate-fresh brew"},
         {"name": "Nagarhole National Park Safari",   "type": "Wildlife Safari",
          "duration_hrs": 3, "entry_fee": "Rs.700/vehicle",
          "best_time": "Early Morning (6–9 AM)",
-         "description": "Spot tigers, leopards, elephants & 300+ birds in one of India's premier reserves"},
+          "description": "Spot tigers, leopards, elephants & 300+ birds in one of "
+                         "India's premier reserves"},
         {"name": "Omkareshwara Temple",              "type": "Spiritual / Heritage",
          "duration_hrs": 1, "entry_fee": "Free",
          "best_time": "Morning",
-         "description": "Unique blend of Islamic & Gothic architecture. Peaceful backwater pond & fish feeding"},
+          "description": "Unique blend of Islamic & Gothic architecture. "
+                         "Peaceful backwater pond & fish feeding"},
         {"name": "Madikeri Fort & Museum",           "type": "History",
          "duration_hrs": 2, "entry_fee": "Rs.20/person",
          "best_time": "Morning",
-         "description": "18th-century fort converted to museum with Kodava artifacts & British-era exhibits"},
+          "description": "18th-century fort converted to museum with Kodava "
+                         "artifacts & British-era exhibits"},
         {"name": "Talakaveri – Source of River Cauvery", "type": "Spiritual / Scenic",
          "duration_hrs": 2.5, "entry_fee": "Free",
          "best_time": "Morning",
-         "description": "Holy origin of Cauvery River atop Brahmagiri hills; short ropeway ride available"},
+          "description": "Holy origin of River Cauvery atop Brahmagiri hills; "
+                         "short ropeway ride available"},
     ]
     plan = []
     for day in range(1, days + 1):
@@ -256,7 +278,8 @@ def initialize_trip(state: TripState) -> dict:
 
 def plan_route(state: TripState) -> dict:
     """Plans the driving route with timed rest stops."""
-    print(f"\n[{datetime.now().strftime('%H:%M:%S')}] PLAN ROUTE – calculating driving itinerary...")
+    print(f"\n[{datetime.now().strftime('%H:%M:%S')}] PLAN ROUTE – "
+          "calculating driving itinerary...")
     time.sleep(0.4)
     route = _mock_route(state["origin"], state["destination"])
     log = (
@@ -302,7 +325,8 @@ def find_homestays(state: TripState) -> dict:
 
 def find_attractions(state: TripState) -> dict:
     """Parallel branch: discovers tourist attractions."""
-    print(f"\n[{datetime.now().strftime('%H:%M:%S')}] FIND ATTRACTIONS – discovering places to visit...")
+    print(f"\n[{datetime.now().strftime('%H:%M:%S')}] FIND ATTRACTIONS – "
+          "discovering places to visit...")
     time.sleep(0.5)
     attractions = _mock_attractions(state["destination"], state["num_days"])
     log = (
@@ -336,7 +360,8 @@ def validate_plan(state: TripState) -> dict:
 
 def assemble_itinerary(state: TripState) -> dict:
     """Final node: merges all data into a structured itinerary."""
-    print(f"\n[{datetime.now().strftime('%H:%M:%S')}] ASSEMBLE ITINERARY – building day-wise plan...")
+    print(f"\n[{datetime.now().strftime('%H:%M:%S')}] ASSEMBLE ITINERARY – "
+          "building day-wise plan...")
     time.sleep(0.4)
     days = {}
     for day in range(1, state["num_days"] + 1):
@@ -372,10 +397,12 @@ def assemble_itinerary(state: TripState) -> dict:
 # ─────────────────────────────────────────────────────────────────────────────
 
 def route_after_init(state: TripState) -> str:
+    """Routing logic after initialization."""
     return "plan_route" if state["status"] == "initialized" else END
 
 
 def route_after_validation(state: TripState) -> str:
+    """Routing logic after validation."""
     return "assemble_itinerary" if state["status"] == "validated" else END
 
 
@@ -384,6 +411,7 @@ def route_after_validation(state: TripState) -> str:
 # ─────────────────────────────────────────────────────────────────────────────
 
 def build_graph():
+    """Builds and compiles the LangGraph."""
     graph = StateGraph(TripState)
 
     graph.add_node("initialize_trip",    initialize_trip)
@@ -469,6 +497,7 @@ EDGE_COLOR = {
 
 
 def visualize_graph(output_path: str = "trip_planner_graph.png"):
+    """Creates a visual representation of the graph using matplotlib."""
     fig, ax = plt.subplots(figsize=(13, 16))
     ax.set_facecolor("#0D1117")
     fig.patch.set_facecolor("#0D1117")
@@ -496,18 +525,18 @@ def visualize_graph(output_path: str = "trip_planner_graph.png"):
         rad = rad_map.get((src, dst), "arc3,rad=0.0")
         ax.annotate(
             "", xy=(x1, y1 + 0.32), xytext=(x0, y0 - 0.32),
-            arrowprops=dict(arrowstyle="-|>", color=color, lw=2.2,
-                            connectionstyle=rad),
+            arrowprops={"arrowstyle": "-|>", "color": color, "lw": 2.2,
+                        "connectionstyle": rad},
             zorder=2
         )
 
     # Nodes
-    NODE_W, NODE_H = 1.2, 0.52
+    node_w, node_h = 1.2, 0.52
     for node_id, style in NODE_STYLE.items():
         x, y    = POSITIONS[node_id]
-        is_end  = (node_id == "END")
-        w = 0.7 if is_end else NODE_W
-        h = 0.38 if is_end else NODE_H
+        is_end  = node_id == "END"
+        w = 0.7 if is_end else node_w
+        h = 0.38 if is_end else node_h
         patch = mpatches.FancyBboxPatch(
             (x - w / 2, y - h / 2), w, h,
             boxstyle="round,pad=0.07",
@@ -563,13 +592,15 @@ BORDER   = "=" * 72
 DIVIDER  = "-" * 72
 
 def hdr(text: str):
+    """Prints a header with dividers."""
     print(f"\n{DIVIDER}\n  {text}\n{DIVIDER}")
 
 def print_itinerary(itinerary: dict):
+    """Prints the formatted itinerary to the console."""
     summary = itinerary["trip_summary"]
     route   = itinerary["travel_route"]
 
-    print(f"\n\n{BORDER}")
+    print("\n\n" + BORDER)
     print(f"  3-DAY FAMILY TRIP ITINERARY")
     print(f"  Origin      : {summary['origin']}")
     print(f"  Destination : {summary['destination']}")
@@ -578,10 +609,11 @@ def print_itinerary(itinerary: dict):
 
     hdr("TRAVEL PLAN (Day 0 - Drive to Destination)")
     print(f"  Route        : {route['highway']}")
-    print(f"  Distance     : {route['total_distance_km']} km  ({route['estimated_drive_hours']} hrs)")
+    print(f"  Distance     : {route['total_distance_km']} km  "
+          f"({route['estimated_drive_hours']} hrs)")
     print(f"  Depart       : {route['departure_time']}   -->  Arrive: {route['arrival_time']}")
     print(f"  Fuel Stops   : {' | '.join(route['fuel_stops'])}")
-    print(f"\n  Rest / Meal Stops en Route:")
+    print("\n  Rest / Meal Stops en Route:")
     for stop in route["rest_stops"]:
         print(f"    [{stop['suggested_break']}]  {stop['name']}  ({stop['type']})")
 
@@ -616,6 +648,7 @@ def print_itinerary(itinerary: dict):
 
 
 def print_execution_summary(logs: List[str]):
+    """Prints the execution log from the graph."""
     hdr("LANGGRAPH EXECUTION LOG")
     for entry in logs:
         for line in entry.split("\n"):
@@ -627,6 +660,7 @@ def print_execution_summary(logs: List[str]):
 # ─────────────────────────────────────────────────────────────────────────────
 
 def main():
+    """Main execution function."""
     print(f"\n{BORDER}")
     print("  LangGraph  -  Family Trip Planner  (Orchestration Demo)")
     print(BORDER)
@@ -703,7 +737,7 @@ def main():
         print("\n[ERROR] Itinerary could not be assembled — check execution log.")
 
     # Save JSON
-    with open("itinerary_output.json", "w") as f:
+    with open("itinerary_output.json", "w", encoding="utf-8") as f:
         json.dump(final_state["itinerary"], f, indent=2, ensure_ascii=False)
 
     print("Itinerary JSON saved  --> itinerary_output.json")
